@@ -31,6 +31,7 @@ dependencies = [
     "click>=8.0.0,<9",
     "rich>=13.0.0,<16",
     "filelock>=3.13,<4",
+    "python-docx>=1.2.0",
 ]
 
 [project.urls]
