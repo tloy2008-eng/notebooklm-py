@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NCF Compliance & Ethics – Board Presentation</title>
+<style>
+  :root {
+    --green: #008751;
+    --dark-green: #005c36;
+    --light-green: #00b368;
+    --gold: #FFD700;
+    --dark-gold: #c9a800;
+    --white: #ffffff;
+    --off-white: #f8f9fa;
+    --dark: #0d1b0f;
+    --card-bg: rgba(255,255,255,0.07);
+    --red: #e63946;
+    --blue: #4361ee;
+    --orange: #f77f00;
+    --purple: #7209b7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0d1b0f;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  /* ── SLIDE SYSTEM ── */
+  .slide-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0; left: 0;
+    overflow-y: auto;
+    animation: fadeIn 0.4s ease;
+  }
+  .slide.active { display: block; }
+
+  @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── NAV BAR ── */
+  .nav-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.85);
+    border-top: 2px solid var(--green);
+    padding: 10px 24px;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+  }
+  .nav-bar button {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .nav-bar button:hover { background: var(--light-green); }
+  .nav-bar button:disabled { background: #444; cursor: default; }
+  #slide-counter { font-size: 13px; color: #aaa; }
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--green), var(--gold));
+    transition: width 0.3s ease;
+    z-index: 1001;
+  }
+
+  /* ── SLIDE WRAPPERS ── */
+  .slide-inner {
+    padding: 50px 60px 90px;
+    min-height: 100vh;
+  }
+  .slide-inner.centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* ── HERO / TITLE ── */
+  .hero-bg {
+    background: linear-gradient(135deg, #002b1a 0%, #005c36 50%, #003d24 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,183,104,0.15) 0%, transparent 70%);
+    top: -150px; right: -100px;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+    bottom: -80px; left: -50px;
+  }
+  .hero-logo {
+    font-size: 72px;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 20px rgba(0,183,104,0.6));
+    position: relative; z-index: 1;
+  }
+  .hero-title {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    color: #fff;
+    position: relative; z-index: 1;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-sub {
+    font-size: 20px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 14px;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,215,0,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 30px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative; z-index: 1;
+  }
+  .hero-divider {
+    width: 80px; height: 4px;
+    background: linear-gradient(90deg, var(--green), var(--gold));
+    border-radius: 2px;
+    margin: 24px auto;
+    position: relative; z-index: 1;
+  }
+
+  /* ── SLIDE HEADERS ── */
+  .slide-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(0,183,104,0.3);
+  }
+  .slide-num {
+    background: var(--green);
+    color: #fff;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px;
+    flex-shrink: 0;
+  }
+  .slide-icon { font-size: 34px; }
+  .slide-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .slide-title span { color: var(--gold); }
+  .slide-subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 2px;
+  }
+
+  /* ── BG VARIANTS ── */
+  .bg-dark { background: linear-gradient(160deg, #0d1b0f 0%, #0a1a0c 100%); }
+  .bg-green { background: linear-gradient(160deg, #003d24 0%, #005c36 100%); }
+  .bg-navy { background: linear-gradient(160deg, #0a0f1e 0%, #131d3b 100%); }
+  .bg-dark2 { background: linear-gradient(160deg, #101010 0%, #1a1a1a 100%); }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    gap: 18px;
+  }
+  .card-grid-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .card-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 22px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: rgba(0,183,104,0.4); }
+
+  .card-icon { font-size: 32px; margin-bottom: 10px; }
+  .card-title { font-size: 16px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+  .card-body { font-size: 13.5px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+  .card.accent-green { border-left: 4px solid var(--green); background: rgba(0,135,81,0.12); }
+  .card.accent-gold { border-left: 4px solid var(--gold); background: rgba(255,215,0,0.07); }
+  .card.accent-red { border-left: 4px solid var(--red); background: rgba(230,57,70,0.08); }
+  .card.accent-blue { border-left: 4px solid var(--blue); background: rgba(67,97,238,0.1); }
+  .card.accent-orange { border-left: 4px solid var(--orange); background: rgba(247,127,0,0.09); }
+  .card.accent-purple { border-left: 4px solid var(--purple); background: rgba(114,9,183,0.1); }
+
+  /* ── STAT BOXES ── */
+  .stat-row {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .stat-box {
+    flex: 1;
+    background: rgba(0,135,81,0.15);
+    border: 1px solid rgba(0,183,104,0.35);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 38px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── PILLARS ── */
+  .pillar-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .pillar {
+    flex: 1;
+    border-radius: 14px;
+    padding: 22px 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .pillar-1 { background: rgba(0,135,81,0.15); } .pillar-1::before { background: var(--green); }
+  .pillar-2 { background: rgba(255,215,0,0.1); } .pillar-2::before { background: var(--gold); }
+  .pillar-3 { background: rgba(67,97,238,0.12); } .pillar-3::before { background: var(--blue); }
+  .pillar-4 { background: rgba(230,57,70,0.1); } .pillar-4::before { background: var(--red); }
+  .pillar-icon { font-size: 30px; margin-bottom: 8px; }
+  .pillar-name { font-size: 14px; font-weight: 800; color: #fff; }
+  .pillar-desc { font-size: 11.5px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 34px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--green), var(--gold));
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 22px;
+  }
+  .tl-dot {
+    position: absolute;
+    left: -28px; top: 4px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 3px solid var(--dark);
+    z-index: 1;
+  }
+  .tl-title { font-size: 14px; font-weight: 700; color: var(--gold); }
+  .tl-body { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 3px; line-height: 1.5; }
+
+  /* ── RISK MATRIX ── */
+  .risk-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .risk-high { background: rgba(230,57,70,0.2); color: #ff6b78; border: 1px solid rgba(230,57,70,0.4); }
+  .risk-med  { background: rgba(247,127,0,0.2); color: #ffad5a; border: 1px solid rgba(247,127,0,0.4); }
+  .risk-low  { background: rgba(0,183,104,0.2); color: #5df5a6; border: 1px solid rgba(0,183,104,0.4); }
+
+  /* ── PROCESS FLOW ── */
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 16px 12px;
+    text-align: center;
+    min-width: 100px;
+  }
+  .flow-step .num {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--green);
+    display: block;
+  }
+  .flow-step .label { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 4px; }
+  .flow-arrow { font-size: 22px; color: var(--gold); flex-shrink: 0; }
+
+  /* ── CASE STUDY ── */
+  .case-header {
+    background: rgba(255,215,0,0.08);
+    border: 1px solid rgba(255,215,0,0.25);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .case-flag { font-size: 36px; }
+  .case-name { font-size: 17px; font-weight: 800; color: #fff; }
+  .case-sub { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '✓';
+    color: var(--green);
+    font-weight: 900;
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .checklist li.warn::before { content: '⚠'; color: var(--orange); }
+  .checklist li.cross::before { content: '✕'; color: var(--red); }
+
+  /* ── PLEDGE CARD ── */
+  .pledge-box {
+    background: linear-gradient(135deg, rgba(0,135,81,0.2), rgba(255,215,0,0.1));
+    border: 2px solid var(--gold);
+    border-radius: 18px;
+    padding: 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .pledge-box::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.12) 0%, transparent 70%);
+  }
+  .pledge-title { font-size: 26px; font-weight: 800; color: var(--gold); margin-bottom: 14px; }
+  .pledge-text { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.8; font-style: italic; }
+  .pledge-sig {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,215,0,0.3);
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+  }
+  .sig-line { flex: 1; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 8px; font-size: 11px; color: rgba(255,255,255,0.45); text-align: center; }
+
+  /* ── ROADMAP ── */
+  .roadmap-row { display: flex; gap: 16px; }
+  .roadmap-phase {
+    flex: 1;
+    border-radius: 14px;
+    padding: 22px 18px;
+  }
+  .phase-1 { background: linear-gradient(160deg, rgba(67,97,238,0.2), rgba(67,97,238,0.07)); border: 1px solid rgba(67,97,238,0.3); }
+  .phase-2 { background: linear-gradient(160deg, rgba(0,135,81,0.2), rgba(0,135,81,0.07)); border: 1px solid rgba(0,135,81,0.35); }
+  .phase-3 { background: linear-gradient(160deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05)); border: 1px solid rgba(255,215,0,0.3); }
+  .phase-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+  .phase-1 .phase-label { color: #7da5ff; }
+  .phase-2 .phase-label { color: var(--light-green); }
+  .phase-3 .phase-label { color: var(--gold); }
+  .phase-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 14px; }
+
+  /* ── TABLE ── */
+  .info-table { width: 100%; border-collapse: collapse; }
+  .info-table th {
+    background: rgba(0,135,81,0.3);
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .info-table td {
+    padding: 9px 14px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    vertical-align: top;
+  }
+  .info-table tr:last-child td { border-bottom: none; }
+  .info-table tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+
+  /* ── TWO-COL LAYOUT ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight {
+    background: linear-gradient(135deg, rgba(0,135,81,0.2), rgba(0,135,81,0.05));
+    border-left: 4px solid var(--green);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+  }
+  .highlight.gold {
+    background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(255,215,0,0.03));
+    border-left-color: var(--gold);
+  }
+  .highlight.red {
+    background: linear-gradient(135deg, rgba(230,57,70,0.15), rgba(230,57,70,0.03));
+    border-left-color: var(--red);
+  }
+
+  /* ── TAG CHIPS ── */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .tag {
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid;
+  }
+  .tag-green { background: rgba(0,135,81,0.15); color: #5df5a6; border-color: rgba(0,183,104,0.35); }
+  .tag-gold  { background: rgba(255,215,0,0.12); color: var(--gold); border-color: rgba(255,215,0,0.35); }
+  .tag-red   { background: rgba(230,57,70,0.12); color: #ff6b78; border-color: rgba(230,57,70,0.35); }
+  .tag-blue  { background: rgba(67,97,238,0.15); color: #7da5ff; border-color: rgba(67,97,238,0.35); }
+
+  /* ── SECTION DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.35), transparent);
+    margin: 22px 0;
+  }
+
+  /* ── QUOTE ── */
+  .quote {
+    text-align: center;
+    font-size: 18px;
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+    border-left: none;
+    padding: 20px 40px;
+    position: relative;
+  }
+  .quote::before { content: '"'; font-size: 80px; color: var(--green); position: absolute; top: -20px; left: 20px; line-height: 1; opacity: 0.5; }
+
+  /* ── FOOTER NOTE ── */
+  .slide-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ── PRINT / EXPORT ── */
+  @media print {
+    .nav-bar, .progress-bar { display: none !important; }
+    .slide { display: block !important; position: relative; page-break-after: always; height: auto; min-height: 100vh; }
+    body { overflow: auto; }
+    .slide-container { overflow: visible; height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+<div class="slide-container" id="slides">
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 1 — TITLE
+════════════════════════════════════════════════ -->
+<div class="slide active hero-bg">
+  <div class="slide-inner centered">
+    <div class="hero-logo">🏏</div>
+    <div class="hero-badge">⭐ Board Presentation · Confidential</div>
+    <div class="hero-divider"></div>
+    <div class="hero-title">Nigeria Cricket Federation<br><span>Compliance &amp; Ethics</span></div>
+    <div class="hero-sub" style="margin-top:20px;font-size:18px;">Awareness Training &amp; Induction for Board &amp; Senior Management</div>
+    <div style="display:flex;gap:24px;margin-top:40px;flex-wrap:wrap;justify-content:center;">
+      <div style="background:rgba(0,135,81,0.2);border:1px solid rgba(0,183,104,0.4);border-radius:12px;padding:14px 24px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:var(--gold);">20</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1px;">Core Slides</div>
+      </div>
+      <div style="background:rgba(0,135,81,0.2);border:1px solid rgba(0,183,104,0.4);border-radius:12px;padding:14px 24px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:var(--gold);">4</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1px;">Case Studies</div>
+      </div>
+      <div style="background:rgba(0,135,81,0.2);border:1px solid rgba(0,183,104,0.4);border-radius:12px;padding:14px 24px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:var(--gold);">90</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1px;">Day Roadmap</div>
+      </div>
+    </div>
+    <div style="margin-top:36px;font-size:13px;color:rgba(255,255,255,0.4);">Facilitator: _________________________ &nbsp;&nbsp; Date: _________________________</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 2 — OBJECTIVES
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">2</div>
+      <div class="slide-icon">🎯</div>
+      <div>
+        <div class="slide-title">Training <span>Objectives</span></div>
+        <div class="slide-subtitle">What this session will achieve</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-num">01</div>
+        <div class="stat-label">Understand Roles</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">02</div>
+        <div class="stat-label">Build Integrity Culture</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">03</div>
+        <div class="stat-label">Identify Concerns</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">04</div>
+        <div class="stat-label">Whistleblowing Protocol</div>
+      </div>
+    </div>
+    <div class="card-grid card-grid-2" style="margin-top:10px;">
+      <div class="card accent-green">
+        <div class="card-icon">🏛️</div>
+        <div class="card-title">Leadership Accountability</div>
+        <div class="card-body">Equip the Board and senior management with a clear understanding of their compliance and ethics obligations in line with ICC governance standards.</div>
+      </div>
+      <div class="card accent-gold">
+        <div class="card-icon">🌍</div>
+        <div class="card-title">Global Standards Alignment</div>
+        <div class="card-body">Align NCF practices with ICC Integrity Framework and Nigerian sports governance requirements to maintain good standing internationally.</div>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-icon">🔍</div>
+        <div class="card-title">Risk Awareness</div>
+        <div class="card-body">Identify and understand key risk areas in cricket governance including match manipulation, conflicts of interest, and financial misconduct.</div>
+      </div>
+      <div class="card accent-purple">
+        <div class="card-icon">📣</div>
+        <div class="card-title">Speak-Up Culture</div>
+        <div class="card-body">Foster a culture where all stakeholders feel empowered and protected to raise concerns without fear of retaliation.</div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 3 — WHAT IS COMPLIANCE & ETHICS
+════════════════════════════════════════════════ -->
+<div class="slide bg-green">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">3</div>
+      <div class="slide-icon">📖</div>
+      <div>
+        <div class="slide-title">What Is <span>Compliance &amp; Ethics?</span></div>
+        <div class="slide-subtitle">Definitions, importance &amp; global frameworks</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <div style="font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">📚 Definitions</div>
+          <div class="highlight" style="margin-bottom:10px;">
+            <strong style="color:#fff;">Compliance</strong> is the act of conforming to rules, policies, laws and regulations governing an organisation's conduct.
+          </div>
+          <div class="highlight gold">
+            <strong style="color:#fff;">Ethics</strong> is the moral framework guiding decisions and conduct — choosing right over wrong even when unmonitored.
+          </div>
+        </div>
+        <div class="card accent-green">
+          <div class="card-icon">🏏</div>
+          <div class="card-title">Importance in Sports Governance</div>
+          <div class="card-body">Preserves integrity of competition · Protects the welfare of athletes and officials · Maintains public trust and sponsorship confidence · Prevents sanctions from ICC and international bodies</div>
+        </div>
+      </div>
+      <div>
+        <div class="card accent-gold" style="margin-bottom:16px;">
+          <div class="card-icon">🌐</div>
+          <div class="card-title">ICC &amp; National Expectations</div>
+          <div class="card-body" style="line-height:1.9;">
+            <strong style="color:#fff;">ICC Integrity Framework</strong> sets mandatory standards for all member associations on anti-corruption, safeguarding, and governance autonomy.<br><br>
+            <strong style="color:#fff;">Nigerian Sports Governance</strong> requires alignment with the National Sports Commission and Sports Trust Fund regulations.
+          </div>
+        </div>
+        <div class="card accent-blue">
+          <div class="card-icon">⚖️</div>
+          <div class="card-title">Why It Matters to the Board</div>
+          <div class="card-body">Board members carry personal accountability. Failure to oversee compliance can result in ICC suspension, loss of funding, reputational damage, and legal liability.</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 4 — NCF COMPLIANCE FRAMEWORK
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">4</div>
+      <div class="slide-icon">🏗️</div>
+      <div>
+        <div class="slide-title">NCF <span>Compliance Framework</span></div>
+        <div class="slide-subtitle">Policies, committees &amp; oversight structure</div>
+      </div>
+    </div>
+    <div class="three-col" style="margin-bottom:22px;">
+      <div class="card accent-green">
+        <div class="card-icon">📜</div>
+        <div class="card-title">Code of Conduct</div>
+        <div class="card-body">Standards of behaviour for all NCF stakeholders — players, officials, coaches, board members and staff. Non-compliance triggers disciplinary proceedings.</div>
+      </div>
+      <div class="card accent-gold">
+        <div class="card-icon">🤝</div>
+        <div class="card-title">Conflict of Interest Policy</div>
+        <div class="card-body">Requires all officials to declare personal, financial or business interests that may conflict with NCF duties. Mandatory annual disclosure.</div>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-icon">📣</div>
+        <div class="card-title">Whistleblowing Policy</div>
+        <div class="card-body">Provides protected channels for reporting suspected misconduct. Anonymity and anti-retaliation protections guaranteed for all reporters.</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div style="font-size:14px;font-weight:700;color:var(--gold);margin-bottom:14px;">🏛️ Committee Structure</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:160px;background:rgba(0,135,81,0.15);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:24px;margin-bottom:6px;">👑</div>
+          <div style="font-size:13px;font-weight:700;color:#fff;">Board of Directors</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;">Ultimate oversight &amp; accountability</div>
+        </div>
+        <div style="font-size:22px;color:var(--gold);align-self:center;">→</div>
+        <div style="flex:1;min-width:160px;background:rgba(255,215,0,0.1);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:24px;margin-bottom:6px;">⚖️</div>
+          <div style="font-size:13px;font-weight:700;color:#fff;">Compliance &amp; Ethics Committee</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;">Policy development &amp; oversight</div>
+        </div>
+        <div style="font-size:22px;color:var(--gold);align-self:center;">→</div>
+        <div style="flex:1;min-width:160px;background:rgba(67,97,238,0.15);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:24px;margin-bottom:6px;">🔍</div>
+          <div style="font-size:13px;font-weight:700;color:#fff;">Compliance Officer</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;">Day-to-day compliance management</div>
+        </div>
+        <div style="font-size:22px;color:var(--gold);align-self:center;">→</div>
+        <div style="flex:1;min-width:160px;background:rgba(114,9,183,0.15);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:24px;margin-bottom:6px;">🏏</div>
+          <div style="font-size:13px;font-weight:700;color:#fff;">All Stakeholders</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;">Players, coaches, officials, staff</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 5 — CORE ETHICAL PRINCIPLES
+════════════════════════════════════════════════ -->
+<div class="slide bg-navy">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">5</div>
+      <div class="slide-icon">🌟</div>
+      <div>
+        <div class="slide-title">Core <span>Ethical Principles</span></div>
+        <div class="slide-subtitle">The four pillars of NCF ethical culture</div>
+      </div>
+    </div>
+    <div class="pillar-row" style="margin-bottom:24px;">
+      <div class="pillar pillar-1">
+        <div class="pillar-icon">🏅</div>
+        <div class="pillar-name">INTEGRITY</div>
+        <div class="pillar-desc">Acting honestly and consistently, even when no one is watching</div>
+      </div>
+      <div class="pillar pillar-2">
+        <div class="pillar-icon">⚖️</div>
+        <div class="pillar-name">FAIRNESS</div>
+        <div class="pillar-desc">Treating all stakeholders equitably without bias or discrimination</div>
+      </div>
+      <div class="pillar pillar-3">
+        <div class="pillar-icon">💼</div>
+        <div class="pillar-name">PROFESSIONALISM</div>
+        <div class="pillar-desc">Maintaining the highest standards of conduct in all official duties</div>
+      </div>
+      <div class="pillar pillar-4">
+        <div class="pillar-icon">📊</div>
+        <div class="pillar-name">ACCOUNTABILITY</div>
+        <div class="pillar-desc">Taking responsibility for actions and decisions; transparent reporting</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="card accent-green">
+        <div class="card-title" style="font-size:14px;">🔑 Why These Principles Matter</div>
+        <ul class="checklist" style="margin-top:10px;">
+          <li>Build credibility with ICC, sponsors and the public</li>
+          <li>Create a safe environment for players and staff</li>
+          <li>Prevent corruption and governance failures</li>
+          <li>Attract investment and international partnerships</li>
+        </ul>
+      </div>
+      <div class="card accent-gold">
+        <div class="card-title" style="font-size:14px;">📋 Applying Principles Daily</div>
+        <ul class="checklist" style="margin-top:10px;">
+          <li>Disclose potential conflicts before meetings</li>
+          <li>Recuse from decisions affecting personal interests</li>
+          <li>Report concerns promptly via proper channels</li>
+          <li>Lead by example — the board sets the tone</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 6 — ROLES & RESPONSIBILITIES
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">6</div>
+      <div class="slide-icon">👥</div>
+      <div>
+        <div class="slide-title">Roles &amp; <span>Responsibilities</span></div>
+        <div class="slide-subtitle">Who is accountable for what</div>
+      </div>
+    </div>
+    <div class="card-grid card-grid-3" style="margin-bottom:18px;">
+      <div class="card accent-gold">
+        <div class="card-icon">👑</div>
+        <div class="card-title">Board Oversight</div>
+        <div class="card-body">Set the ethical tone at the top · Approve compliance policies · Review audit reports · Ensure adequate resources for compliance function · Hold management accountable</div>
+      </div>
+      <div class="card accent-green">
+        <div class="card-icon">🏢</div>
+        <div class="card-title">Executive Management</div>
+        <div class="card-body">Implement board-approved policies · Monitor compliance activities · Report material breaches to the board · Ensure staff training and awareness · Escalate risks proactively</div>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-icon">⚖️</div>
+        <div class="card-title">Compliance Committee</div>
+        <div class="card-body">Develop and review policies · Oversee investigations · Advise the board on risk areas · Maintain the whistleblowing system · Report on compliance performance</div>
+      </div>
+    </div>
+    <div class="card-grid card-grid-3">
+      <div class="card accent-orange">
+        <div class="card-icon">🏏</div>
+        <div class="card-title">Players</div>
+        <div class="card-body">Abide by the Code of Conduct · Report approaches from bookmakers · Comply with anti-doping requirements · Declare any conflicts of interest</div>
+      </div>
+      <div class="card accent-purple">
+        <div class="card-icon">👨‍🏫</div>
+        <div class="card-title">Coaches &amp; Officials</div>
+        <div class="card-body">Model ethical behaviour · Safeguard player welfare · Report misconduct promptly · Ensure fair and transparent selection</div>
+      </div>
+      <div class="card accent-red">
+        <div class="card-icon">🧑‍💼</div>
+        <div class="card-title">Staff</div>
+        <div class="card-body">Follow NCF policies in daily work · Report suspected breaches · Participate in compliance training · Maintain confidentiality of sensitive information</div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 7 — KEY RISK AREAS
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark2">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">7</div>
+      <div class="slide-icon">⚠️</div>
+      <div>
+        <div class="slide-title">Key <span>Governance &amp; Compliance Risks</span></div>
+        <div class="slide-subtitle">The four major risk areas in cricket administration</div>
+      </div>
+    </div>
+    <div class="card-grid card-grid-2">
+      <div class="card accent-red">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="font-size:32px;">🎰</div>
+          <div>
+            <div class="card-title">Match Manipulation &amp; Betting</div>
+            <span class="risk-badge risk-high">● HIGH RISK</span>
+          </div>
+        </div>
+        <div class="card-body">Spot-fixing, result-fixing or providing inside information to bookmakers. Carries ICC lifetime bans, criminal prosecution, and reputational destruction for the federation.</div>
+        <div class="tag-row"><span class="tag tag-red">Anti-Corruption</span><span class="tag tag-red">ICC ACU</span></div>
+      </div>
+      <div class="card accent-orange">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="font-size:32px;">🤝</div>
+          <div>
+            <div class="card-title">Conflict of Interest</div>
+            <span class="risk-badge risk-high">● HIGH RISK</span>
+          </div>
+        </div>
+        <div class="card-body">Officials favouring personal business interests over NCF's best interests — in procurement, selection, or sponsorship decisions. Undermines trust and may constitute corruption.</div>
+        <div class="tag-row"><span class="tag tag-gold">Declaration Required</span><span class="tag tag-gold">Recusal</span></div>
+      </div>
+      <div class="card accent-blue">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="font-size:32px;">💰</div>
+          <div>
+            <div class="card-title">Financial Mismanagement</div>
+            <span class="risk-badge risk-high">● HIGH RISK</span>
+          </div>
+        </div>
+        <div class="card-body">Fraud, embezzlement, misuse of ICC development funds, or inadequate financial controls. Can trigger ICC suspension and loss of all funding streams.</div>
+        <div class="tag-row"><span class="tag tag-blue">Audit Controls</span><span class="tag tag-blue">Transparency</span></div>
+      </div>
+      <div class="card accent-purple">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="font-size:32px;">🛡️</div>
+          <div>
+            <div class="card-title">Safeguarding &amp; Anti-Doping</div>
+            <span class="risk-badge risk-med">● MEDIUM RISK</span>
+          </div>
+        </div>
+        <div class="card-body">Harassment, bullying, discrimination, or abuse of athletes. WADA and ICC anti-doping violations carry sporting sanctions and legal consequences.</div>
+        <div class="tag-row"><span class="tag tag-blue">Safe Sport</span><span class="tag tag-blue">WADA</span></div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 8 — CONFLICT OF INTEREST
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">8</div>
+      <div class="slide-icon">🤝</div>
+      <div>
+        <div class="slide-title">Conflict of <span>Interest</span></div>
+        <div class="slide-subtitle">Definition, examples and the declaration process</div>
+      </div>
+    </div>
+    <div class="two-col" style="margin-bottom:18px;">
+      <div>
+        <div class="highlight gold" style="margin-bottom:16px;">
+          <strong style="color:var(--gold);">Definition:</strong> A conflict of interest arises when a personal, financial or other interest of an NCF official could — or could appear to — influence their objective judgment in carrying out NCF duties.
+        </div>
+        <div class="card accent-red" style="margin-bottom:12px;">
+          <div class="card-title">⚡ Common Examples</div>
+          <ul class="checklist" style="margin-top:8px;">
+            <li class="warn">Board member awarding contract to own company</li>
+            <li class="warn">Selector choosing family member for national squad</li>
+            <li class="warn">Official accepting gifts from sponsors seeking contracts</li>
+            <li class="warn">Coach with financial stake in player's management agency</li>
+            <li class="warn">Board member with political ties influencing governance</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card accent-green">
+          <div class="card-title">📋 Declaration Process</div>
+          <div class="timeline" style="margin-top:14px;">
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-title">Step 1 — Identify</div>
+              <div class="tl-body">Recognise that a personal interest may conflict with your NCF role before the relevant meeting or decision.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot" style="background:var(--gold);"></div>
+              <div class="tl-title">Step 2 — Declare</div>
+              <div class="tl-body">Submit a written declaration to the Compliance Officer or chairperson before the agenda item is discussed.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot" style="background:var(--blue);"></div>
+              <div class="tl-title">Step 3 — Recuse</div>
+              <div class="tl-body">Withdraw from the discussion and any vote on the matter. Leave the meeting room if required.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot" style="background:var(--orange);"></div>
+              <div class="tl-title">Step 4 — Record</div>
+              <div class="tl-body">The declaration and recusal are minuted and retained on the conflict of interest register.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 9 — CODE OF CONDUCT
+════════════════════════════════════════════════ -->
+<div class="slide bg-green">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">9</div>
+      <div class="slide-icon">📜</div>
+      <div>
+        <div class="slide-title">Code of <span>Conduct Essentials</span></div>
+        <div class="slide-subtitle">Standards that apply to every NCF stakeholder</div>
+      </div>
+    </div>
+    <div class="card-grid card-grid-4" style="margin-bottom:18px;">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:36px;margin-bottom:8px;">🤲</div>
+        <div class="card-title">Respect</div>
+        <div class="card-body">Treat all persons with dignity — regardless of gender, nationality, religion or status</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:36px;margin-bottom:8px;">⚖️</div>
+        <div class="card-title">Impartiality</div>
+        <div class="card-body">Make decisions based on merit, evidence and NCF's best interests — never personal gain</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:36px;margin-bottom:8px;">🛡️</div>
+        <div class="card-title">Safe Sport</div>
+        <div class="card-body">Zero tolerance for harassment, bullying, abuse or any conduct that endangers athlete welfare</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:36px;margin-bottom:8px;">🚫</div>
+        <div class="card-title">No Discrimination</div>
+        <div class="card-body">Prohibits discrimination on any ground in selection, employment or participation decisions</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="card accent-green">
+        <div class="card-title">✅ Expected Behaviours</div>
+        <ul class="checklist" style="margin-top:10px;">
+          <li>Uphold NCF's reputation at all times in public and private</li>
+          <li>Avoid conduct that brings the game or NCF into disrepute</li>
+          <li>Cooperate fully with any investigation or audit</li>
+          <li>Declare gifts received above the prescribed threshold</li>
+        </ul>
+      </div>
+      <div class="card accent-red">
+        <div class="card-title">❌ Prohibited Conduct</div>
+        <ul class="checklist" style="margin-top:10px;">
+          <li class="cross">Engagement with illegal betting or match manipulation</li>
+          <li class="cross">Sexual harassment or physical abuse of any person</li>
+          <li class="cross">Falsification of records or financial fraud</li>
+          <li class="cross">Retaliation against a whistleblower or witness</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 10 — WHISTLEBLOWING PROTOCOL
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">10</div>
+      <div class="slide-icon">📣</div>
+      <div>
+        <div class="slide-title">Whistleblowing <span>Protocol</span></div>
+        <div class="slide-subtitle">Reporting channels, anonymity &amp; anti-retaliation protections</div>
+      </div>
+    </div>
+    <div class="three-col" style="margin-bottom:18px;">
+      <div class="card" style="text-align:center;border-color:rgba(0,183,104,0.35);">
+        <div style="font-size:36px;margin-bottom:10px;">🔒</div>
+        <div class="card-title">Anonymous Portal</div>
+        <div class="card-body">Secure, encrypted online portal for fully anonymous reporting. Unique reference number issued within 48 hours.</div>
+        <div style="margin-top:12px;font-size:12px;color:var(--light-green);font-weight:600;">whistleblow@ncf.ng</div>
+      </div>
+      <div class="card" style="text-align:center;border-color:rgba(255,215,0,0.35);">
+        <div style="font-size:36px;margin-bottom:10px;">📞</div>
+        <div class="card-title">Confidential Hotline</div>
+        <div class="card-body">Dedicated phone line staffed by the Compliance Officer. Calls are confidential and never recorded without consent.</div>
+        <div style="margin-top:12px;font-size:12px;color:var(--gold);font-weight:600;">+234 700 NCF WHISTLE</div>
+      </div>
+      <div class="card" style="text-align:center;border-color:rgba(67,97,238,0.35);">
+        <div style="font-size:36px;margin-bottom:10px;">🧑‍💼</div>
+        <div class="card-title">In-Person Reporting</div>
+        <div class="card-body">Report directly to the Compliance Officer or any member of the Ethics Committee in a private, confidential setting.</div>
+        <div style="margin-top:12px;font-size:12px;color:#7da5ff;font-weight:600;">compliance@ncf.ng</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="card accent-green">
+        <div class="card-title">🛡️ What's Protected</div>
+        <ul class="checklist" style="margin-top:8px;">
+          <li>Full anonymity if requested (unless legally required to disclose)</li>
+          <li>Zero tolerance for retaliation — a disciplinary offence</li>
+          <li>Counselling, legal aid and support available for reporter</li>
+          <li>Confidentiality of report and identity maintained throughout</li>
+        </ul>
+      </div>
+      <div class="card accent-gold">
+        <div class="card-title">📋 What Can Be Reported</div>
+        <ul class="checklist" style="margin-top:8px;">
+          <li>Financial irregularities — fraud, embezzlement</li>
+          <li>Breaches of anti-corruption policies or match-fixing</li>
+          <li>Harassment, bullying or discrimination</li>
+          <li>Conflicts of interest or abuse of power</li>
+          <li>Violations of laws, regulations or NCF policies</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 11 — INVESTIGATION PROCESS
+════════════════════════════════════════════════ -->
+<div class="slide bg-navy">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">11</div>
+      <div class="slide-icon">🔍</div>
+      <div>
+        <div class="slide-title">Investigation <span>Process</span></div>
+        <div class="slide-subtitle">From report submission to resolution</div>
+      </div>
+    </div>
+    <div class="flow-row" style="margin-bottom:28px;">
+      <div class="flow-step">
+        <span class="num">01</span>
+        <div style="font-size:24px;margin:4px 0;">📥</div>
+        <div class="label">Report<br>Received</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <span class="num">02</span>
+        <div style="font-size:24px;margin:4px 0;">📋</div>
+        <div class="label">Assessment<br>(48 hrs)</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <span class="num">03</span>
+        <div style="font-size:24px;margin:4px 0;">🔎</div>
+        <div class="label">Investigation<br>(30 days)</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <span class="num">04</span>
+        <div style="font-size:24px;margin:4px 0;">📊</div>
+        <div class="label">Report<br>Findings</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <span class="num">05</span>
+        <div style="font-size:24px;margin:4px 0;">⚡</div>
+        <div class="label">Action<br>Taken</div>
+      </div>
+    </div>
+    <div class="card-grid card-grid-2" style="margin-bottom:16px;">
+      <div class="card accent-blue">
+        <div class="card-title">🔍 Assessment Phase</div>
+        <div class="card-body">The Compliance Officer screens the report for credibility and scope. Frivolous or vexatious reports are dismissed with feedback. Valid reports trigger formal investigation assignment.</div>
+      </div>
+      <div class="card accent-green">
+        <div class="card-title">🔎 Investigation Phase</div>
+        <div class="card-body">Assigned to an independent investigator or the Ethics Committee. Evidence collection, confidential interviews, and a 30-day timeline (extendable). Updates provided every 14 days to the reporter.</div>
+      </div>
+      <div class="card accent-gold">
+        <div class="card-title">📊 Outcome &amp; Report</div>
+        <div class="card-body">Findings reported to the NCF Board and relevant authorities. Outcomes may include disciplinary measures, policy changes, referral to ICC Anti-Corruption Unit, or law enforcement.</div>
+      </div>
+      <div class="card accent-red">
+        <div class="card-title">⚡ Escalation Triggers</div>
+        <div class="card-body">Serious violations are escalated to the ICC Anti-Corruption Unit or Nigerian law enforcement. The annual audit reviews process effectiveness and drives policy improvement.</div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 12a — CASE STUDY: MATCH MANIPULATION
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">12a</div>
+      <div class="slide-icon">📚</div>
+      <div>
+        <div class="slide-title">Case Study: <span>Match Manipulation</span></div>
+        <div class="slide-subtitle">Pakistan spot-fixing scandal — Lord's Test, August 2010</div>
+      </div>
+    </div>
+    <div class="case-header">
+      <div class="case-flag">🇵🇰</div>
+      <div>
+        <div class="case-name">Pakistan Spot-Fixing Scandal (2010)</div>
+        <div class="case-sub">Mohamamd Amir · Mohammad Asif · Salman Butt · Lord's Test vs England</div>
+      </div>
+      <div style="margin-left:auto;"><span class="risk-badge risk-high">● CORRUPTION</span></div>
+    </div>
+    <div class="three-col">
+      <div class="card accent-red">
+        <div class="card-title">⚡ What Happened</div>
+        <div class="card-body" style="font-size:12.5px;line-height:1.7;">Bookmakers bribed players to bowl deliberate no-balls at pre-agreed moments. A News of the World sting operation recorded the deal. Players were arrested, tried in the UK, jailed and given 5–7 year ICC bans.</div>
+      </div>
+      <div class="card accent-orange">
+        <div class="card-title">🚨 Issues &amp; Impact</div>
+        <ul class="checklist" style="margin-top:8px;font-size:12px;">
+          <li class="cross">Breach of trust with fans &amp; sponsors</li>
+          <li class="cross">Criminal charges &amp; imprisonment</li>
+          <li class="cross">Tarnished image of Pakistan cricket</li>
+          <li class="cross">Undermined integrity of international cricket</li>
+        </ul>
+      </div>
+      <div class="card accent-green">
+        <div class="card-title">✅ NCF Preventive Measures</div>
+        <ul class="checklist" style="margin-top:8px;font-size:12px;">
+          <li>Robust anti-corruption code with strict penalties</li>
+          <li>Mandatory ICC ACU education for all players</li>
+          <li>AI-driven monitoring of suspicious betting patterns</li>
+          <li>Confidential reporting hotline for bookmaker approaches</li>
+          <li>Financial counselling to reduce vulnerability to bribes</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight red" style="margin-top:16px;">
+      <strong>🔑 NCF Lesson:</strong> Even a single incident of match manipulation can result in lifelong reputational damage, ICC sanctions, and criminal prosecution. All players and officials must report any approach immediately to the Compliance Officer or ICC Anti-Corruption Unit.
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 12b — CASE STUDY: CONFLICT OF INTEREST
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">12b</div>
+      <div class="slide-icon">📚</div>
+      <div>
+        <div class="slide-title">Case Study: <span>Conflict of Interest</span></div>
+        <div class="slide-subtitle">BCCI — The Greg Chappell Era (2005–2007)</div>
+      </div>
+    </div>
+    <div class="case-header">
+      <div class="case-flag">🇮🇳</div>
+      <div>
+        <div class="case-name">BCCI — Coach Influence on Team Selection</div>
+        <div class="case-sub">Greg Chappell · Selection controversy · Removal of Sourav Ganguly &amp; other seniors (2005)</div>
+      </div>
+      <div style="margin-left:auto;"><span class="risk-badge risk-med">● GOVERNANCE</span></div>
+    </div>
+    <div class="three-col">
+      <div class="card accent-orange">
+        <div class="card-title">⚡ What Happened</div>
+        <div class="card-body" style="font-size:12.5px;line-height:1.7;">Coach Greg Chappell was alleged to have improperly influenced selectors to drop senior players including Sourav Ganguly. The absence of clear role boundaries led to public disputes, eroding team morale and BCCI's credibility. Chappell departed in 2007.</div>
+      </div>
+      <div class="card accent-red">
+        <div class="card-title">🚨 Issues &amp; Impact</div>
+        <ul class="checklist" style="margin-top:8px;font-size:12px;">
+          <li class="cross">Erosion of public trust in selection process</li>
+          <li class="cross">Compromised team performance</li>
+          <li class="cross">Lack of transparency and accountability</li>
+          <li class="cross">Public fallout between coach and players</li>
+        </ul>
+      </div>
+      <div class="card accent-green">
+        <div class="card-title">✅ NCF Preventive Measures</div>
+        <ul class="checklist" style="margin-top:8px;font-size:12px;">
+          <li>Clear written mandate — coach is advisory, not selector</li>
+          <li>Independent selection committee with fixed staggered terms</li>
+          <li>Published, transparent selection criteria</li>
+          <li>Mandatory CoI declaration before selection meetings</li>
+          <li>Ethics committee to investigate selection complaints</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight gold" style="margin-top:16px;">
+      <strong>🔑 NCF Lesson:</strong> Unclear role boundaries are a governance risk. NCF must define and publish selection criteria, separate the coach and selector roles, and mandate conflict-of-interest declarations for all decision-making bodies.
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 12c — CASE STUDY: HARASSMENT & SAFEGUARDING
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">12c</div>
+      <div class="slide-icon">📚</div>
+      <div>
+        <div class="slide-title">Case Study: <span>Harassment &amp; Safeguarding</span></div>
+        <div class="slide-subtitle">Cricket Australia — The 2018 Sanderson Affair</div>
+      </div>
+    </div>
+    <div class="case-header">
+      <div class="case-flag">🇦🇺</div>
+      <div>
+        <div class="case-name">Cricket Australia — Workplace Harassment (2018)</div>
+        <div class="case-sub">James Sutherland · Dianna Brooks · Independent review &amp; CEO resignation</div>
+      </div>
+      <div style="margin-left:auto;"><span class="risk-badge risk-high">● SAFEGUARDING</span></div>
+    </div>
+    <div class="three-col">
+      <div class="card accent-purple">
+        <div class="card-title">⚡ What Happened</div>
+        <div class="card-body" style="font-size:12.5px;line-height:1.7;">A former CA employee raised harassment complaints in 2013. The inadequate response by CA leadership led to the employee's departure in 2014. By 2018, an independent review exposed systemic failures, prompting the CEO's resignation and a public reckoning over gender equality in Australian sport.</div>
+      </div>
+      <div class="card accent-red">
+        <div class="card-title">🚨 Issues &amp; Impact</div>
+        <ul class="checklist" style="margin-top:8px;font-size:12px;">
+          <li class="cross">Hostile workplace — culture of silence and fear</li>
+          <li class="cross">Inadequate response to complaints</li>
+          <li class="cross">Major reputational damage for CA</li>
+          <li class="cross">National conversation on gender safety in sport</li>
+        </ul>
+      </div>
+      <div class="card accent-green">
+        <div class="card-title">✅ NCF Preventive Measures</div>
+        <ul class="checklist" style="margin-top:8px;font-size:12px;">
+          <li>Zero-tolerance harassment policy with clear process</li>
+          <li>External, confidential reporting system</li>
+          <li>Dedicated safeguarding officer — trained specialist</li>
+          <li>Mandatory bystander intervention training for all staff</li>
+          <li>Counselling and legal support for victims</li>
+          <li>Diverse boards and committees to enhance inclusivity</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight" style="margin-top:16px;">
+      <strong>🔑 NCF Lesson:</strong> Inadequate response to a single complaint can escalate into systemic scandal. NCF must ensure every complaint is handled promptly, transparently and with full support for the reporter, at every level of management.
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 12d — CASE STUDY: GOVERNANCE BREAKDOWN
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">12d</div>
+      <div class="slide-icon">📚</div>
+      <div>
+        <div class="slide-title">Case Study: <span>Governance Breakdown</span></div>
+        <div class="slide-subtitle">Zambia Cricket (2019) &amp; Sri Lanka Cricket (2023)</div>
+      </div>
+    </div>
+    <div class="two-col" style="margin-bottom:16px;">
+      <div>
+        <div class="case-header" style="margin-bottom:14px;">
+          <div class="case-flag">🇿🇲</div>
+          <div>
+            <div class="case-name">Zambia Cricket Union — Suspended 2019</div>
+            <div class="case-sub">Non-compliance · Expulsion 2021 · Reinstated 2025</div>
+          </div>
+        </div>
+        <div class="card accent-red" style="margin-bottom:10px;">
+          <div class="card-title" style="font-size:12px;">Issues</div>
+          <div class="card-body" style="font-size:12px;">Failed ICC governance standards · Weak institutional frameworks · Lack of transparency · Barred from all ICC events for 6 years.</div>
+        </div>
+        <div class="card accent-green">
+          <div class="card-title" style="font-size:12px;">Fix: Governance Overhaul</div>
+          <ul class="checklist" style="margin-top:6px;font-size:11.5px;">
+            <li>Clear policies aligned with ICC standards</li>
+            <li>Administrator training on governance &amp; compliance</li>
+            <li>Independent oversight &amp; regular audits</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="case-header" style="margin-bottom:14px;">
+          <div class="case-flag">🇱🇰</div>
+          <div>
+            <div class="case-name">Sri Lanka Cricket — Suspended Nov 2023</div>
+            <div class="case-sub">Government interference · ICC Article 2.4(D) breach · World Cup relocated</div>
+          </div>
+        </div>
+        <div class="card accent-red" style="margin-bottom:10px;">
+          <div class="card-title" style="font-size:12px;">Issues</div>
+          <div class="card-body" style="font-size:12px;">Government dissolved SLC board after poor World Cup performance. Violated ICC autonomy rules. Lost funding, suspended from events, Under-19 World Cup relocated to South Africa.</div>
+        </div>
+        <div class="card accent-green">
+          <div class="card-title" style="font-size:12px;">Fix: Autonomy &amp; Legal Reforms</div>
+          <ul class="checklist" style="margin-top:6px;font-size:11.5px;">
+            <li>New sports law reducing ministerial powers</li>
+            <li>Governance structure aligned with ICC standards</li>
+            <li>Stakeholder dialogue: ICC + government + SLC</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="highlight red">
+      <strong>🔑 NCF Lesson:</strong> Government interference in NCF governance, or failure to meet ICC membership criteria, risks suspension from international cricket with severe financial and reputational consequences. The Board must champion and protect NCF's constitutional autonomy.
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 13 — EVENT & MATCH MANAGEMENT
+════════════════════════════════════════════════ -->
+<div class="slide bg-green">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">13</div>
+      <div class="slide-icon">🏟️</div>
+      <div>
+        <div class="slide-title">Compliance in <span>Event &amp; Match Management</span></div>
+        <div class="slide-subtitle">Pre-match integrity controls and monitoring obligations</div>
+      </div>
+    </div>
+    <div class="two-col" style="margin-bottom:20px;">
+      <div class="card accent-green">
+        <div class="card-title">📋 Pre-Match Compliance Checks</div>
+        <ul class="checklist" style="margin-top:10px;">
+          <li>Verify all player eligibility documentation</li>
+          <li>Brief players on reporting duty — any approach from bookmakers</li>
+          <li>Confirm anti-doping officer is on-site and testing plan is in place</li>
+          <li>Check accreditation of all match officials and media</li>
+          <li>Confirm conflict-of-interest declarations from match officials</li>
+          <li>Ensure secure, restricted area protocols are enforced</li>
+        </ul>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-title">🔍 Integrity Monitoring</div>
+        <ul class="checklist" style="margin-top:10px;">
+          <li>Monitor suspicious betting activity via ICC ACU tools</li>
+          <li>Review unusual patterns in player or official behaviour</li>
+          <li>Maintain restricted areas — no unauthorized access to dressing rooms</li>
+          <li>Prohibit mobile phones in certain areas during play</li>
+          <li>Record all unusual occurrences in the match integrity log</li>
+          <li>Report concerns immediately to the Compliance Officer</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-grid card-grid-3">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:32px;margin-bottom:8px;">📵</div>
+        <div class="card-title">Device Policy</div>
+        <div class="card-body" style="font-size:12px;">No personal devices in dressing rooms. All communications logged.</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:32px;margin-bottom:8px;">🚷</div>
+        <div class="card-title">Access Control</div>
+        <div class="card-body" style="font-size:12px;">Strict accreditation for all areas. Visitors logged and supervised.</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:32px;margin-bottom:8px;">📝</div>
+        <div class="card-title">Post-Match Review</div>
+        <div class="card-body" style="font-size:12px;">Incident log reviewed within 24 hours. Any concerns escalated promptly.</div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 14 — ANTI-DOPING
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">14</div>
+      <div class="slide-icon">🧪</div>
+      <div>
+        <div class="slide-title">Anti-Doping <span>Obligations</span></div>
+        <div class="slide-subtitle">ICC &amp; WADA compliance requirements</div>
+      </div>
+    </div>
+    <div class="two-col" style="margin-bottom:20px;">
+      <div>
+        <div class="highlight gold" style="margin-bottom:16px;">
+          NCF is obligated to enforce the <strong>ICC Anti-Doping Code</strong> (aligned with the World Anti-Doping Code — WADA) for all players participating in NCF-sanctioned competitions.
+        </div>
+        <div class="card accent-green">
+          <div class="card-title">📋 Key NCF Obligations</div>
+          <ul class="checklist" style="margin-top:10px;">
+            <li>Implement and enforce the ICC Anti-Doping Code</li>
+            <li>Conduct in-competition and out-of-competition testing</li>
+            <li>Provide whereabouts information for targeted testing</li>
+            <li>Educate all players on prohibited substances list</li>
+            <li>Report positive tests to ICC within required timeframe</li>
+            <li>Impose mandatory sanctions for anti-doping violations</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card-grid" style="gap:14px;">
+          <div class="card accent-red">
+            <div class="card-icon">⚗️</div>
+            <div class="card-title">Prohibited Substances</div>
+            <div class="card-body">WADA annually publishes the prohibited list covering stimulants, narcotics, steroids, peptide hormones, beta-blockers, diuretics and masking agents. Therapeutic use exemptions (TUEs) apply.</div>
+          </div>
+          <div class="card accent-orange">
+            <div class="card-icon">🚫</div>
+            <div class="card-title">Sanctions</div>
+            <div class="card-body">First violation: 4-year ban (intentional doping). Presence/use of prohibited substance: 2-year ban. Repeated violations: lifetime ban. All results from that period may be disqualified.</div>
+          </div>
+          <div class="card accent-blue">
+            <div class="card-icon">📚</div>
+            <div class="card-title">Education Requirement</div>
+            <div class="card-body">Annual anti-doping education is mandatory for all NCF-registered players and support personnel. Records of training must be maintained for ICC audit purposes.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 15 — AUDIT & MONITORING
+════════════════════════════════════════════════ -->
+<div class="slide bg-navy">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">15</div>
+      <div class="slide-icon">📊</div>
+      <div>
+        <div class="slide-title">Audit &amp; <span>Monitoring</span></div>
+        <div class="slide-subtitle">Internal audits, key performance indicators &amp; annual reporting</div>
+      </div>
+    </div>
+    <div class="three-col" style="margin-bottom:20px;">
+      <div class="card accent-green">
+        <div class="card-icon">🔍</div>
+        <div class="card-title">Internal Audits</div>
+        <div class="card-body">Quarterly reviews of compliance activities · Annual deep-dive audit of all policies and procedures · Financial controls audit semi-annually · Audit reports submitted to Board</div>
+      </div>
+      <div class="card accent-gold">
+        <div class="card-icon">📈</div>
+        <div class="card-title">Performance Indicators</div>
+        <div class="card-body">% of staff completing compliance training · Number of reports received and resolved · Time to close investigations · Policy review cycle completion rate · Board attendance at compliance sessions</div>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-icon">📄</div>
+        <div class="card-title">Annual Reporting</div>
+        <div class="card-body">Compliance annual report to the Board and ICC · Anonymised summary of substantiated cases published · Policy updates and improvement actions documented · Forward-looking risk assessment provided</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <div style="font-size:14px;font-weight:700;color:var(--gold);margin-bottom:14px;">📋 Audit Checklist — Key Areas</div>
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Area</th><th>Frequency</th><th>Responsible</th><th>Evidence Required</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Conflict of Interest Register</td><td>Quarterly</td><td>Compliance Officer</td><td>Signed declaration forms</td></tr>
+          <tr><td>Staff Compliance Training</td><td>Annual</td><td>HR / Compliance</td><td>Attendance registers</td></tr>
+          <tr><td>Whistleblowing Reports Log</td><td>Monthly</td><td>Compliance Officer</td><td>Case tracking log</td></tr>
+          <tr><td>Financial Controls Review</td><td>Semi-annual</td><td>Finance / Internal Audit</td><td>Bank reconciliations, approvals</td></tr>
+          <tr><td>ICC Membership Criteria</td><td>Annual</td><td>CEO / Board</td><td>ICC self-assessment form</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 16 — CONSEQUENCES OF NON-COMPLIANCE
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark2">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">16</div>
+      <div class="slide-icon">⚡</div>
+      <div>
+        <div class="slide-title">Consequences of <span>Non-Compliance</span></div>
+        <div class="slide-subtitle">What is at stake for NCF, individuals and Nigerian cricket</div>
+      </div>
+    </div>
+    <div class="card-grid card-grid-3" style="margin-bottom:20px;">
+      <div class="card accent-red">
+        <div style="font-size:36px;margin-bottom:10px;">🚫</div>
+        <div class="card-title">Disciplinary Action</div>
+        <div class="card-body">Warnings and formal reprimands · Suspension from duties · Termination of employment or role · Bans from cricket at all levels · Financial penalties and recovery of funds</div>
+      </div>
+      <div class="card accent-orange">
+        <div style="font-size:36px;margin-bottom:10px;">🌍</div>
+        <div class="card-title">ICC Escalation</div>
+        <div class="card-body">Referral to ICC Anti-Corruption Unit · Suspension of NCF membership · Loss of ICC Development Fund grants · Removal from international events · Reputational damage affecting future investment</div>
+      </div>
+      <div class="card accent-purple">
+        <div style="font-size:36px;margin-bottom:10px;">⚖️</div>
+        <div class="card-title">Legal Consequences</div>
+        <div class="card-body">Criminal prosecution for fraud or corruption · Civil liability for negligence or breach of duty · Regulatory action by the Nigerian Sports Commission · Directors' personal liability for governance failures</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="card accent-red">
+        <div class="card-title">💔 Real-World Impact</div>
+        <ul class="checklist" style="margin-top:10px;">
+          <li class="cross">Nigerian cricket excluded from ICC events</li>
+          <li class="cross">Players unable to represent Nigeria internationally</li>
+          <li class="cross">Loss of sponsors and commercial revenue</li>
+          <li class="cross">Destruction of decades of grassroots cricket development</li>
+        </ul>
+      </div>
+      <div class="card accent-green">
+        <div class="card-title">✅ How to Avoid This</div>
+        <ul class="checklist" style="margin-top:10px;">
+          <li>Attend and complete all mandatory compliance training</li>
+          <li>Report suspected violations immediately — don't wait</li>
+          <li>Declare all conflicts of interest before every meeting</li>
+          <li>Support investigations rather than impede them</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 17 — HOW TO REPORT
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">17</div>
+      <div class="slide-icon">📬</div>
+      <div>
+        <div class="slide-title">How To <span>Report a Concern</span></div>
+        <div class="slide-subtitle">Multiple channels — choose what works best for you</div>
+      </div>
+    </div>
+    <div class="card-grid card-grid-3" style="margin-bottom:22px;">
+      <div class="card" style="border-color:rgba(0,183,104,0.4);text-align:center;padding:28px 22px;">
+        <div style="font-size:44px;margin-bottom:12px;">📧</div>
+        <div class="card-title" style="font-size:15px;">Email</div>
+        <div style="background:rgba(0,135,81,0.15);border:1px solid rgba(0,183,104,0.3);border-radius:8px;padding:10px;margin-top:12px;">
+          <div style="font-size:13px;font-weight:700;color:var(--light-green);">whistleblow@ncf.ng</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px;">compliance@ncf.ng</div>
+        </div>
+        <div class="card-body" style="margin-top:12px;font-size:12px;">Secure encrypted email. Acknowledged within 48 hours. Unique case reference provided.</div>
+      </div>
+      <div class="card" style="border-color:rgba(255,215,0,0.4);text-align:center;padding:28px 22px;">
+        <div style="font-size:44px;margin-bottom:12px;">📞</div>
+        <div class="card-title" style="font-size:15px;">Hotline</div>
+        <div style="background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.3);border-radius:8px;padding:10px;margin-top:12px;">
+          <div style="font-size:13px;font-weight:700;color:var(--gold);">+234 700 NCF WHISTLE</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px;">+234 700 NCF COMPL</div>
+        </div>
+        <div class="card-body" style="margin-top:12px;font-size:12px;">Confidential voice reporting. Available during business hours. Anonymous calls accepted.</div>
+      </div>
+      <div class="card" style="border-color:rgba(67,97,238,0.4);text-align:center;padding:28px 22px;">
+        <div style="font-size:44px;margin-bottom:12px;">🧑‍💼</div>
+        <div class="card-title" style="font-size:15px;">In Person</div>
+        <div style="background:rgba(67,97,238,0.1);border:1px solid rgba(67,97,238,0.3);border-radius:8px;padding:10px;margin-top:12px;">
+          <div style="font-size:13px;font-weight:700;color:#7da5ff;">Compliance Officer</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px;">Ethics Committee Member</div>
+        </div>
+        <div class="card-body" style="margin-top:12px;font-size:12px;">Private meeting arranged. No record of meeting without your consent. Full confidentiality assured.</div>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(255,215,0,0.25);">
+      <div style="font-size:14px;font-weight:700;color:var(--gold);margin-bottom:12px;">📋 What to Include in Your Report</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:120px;text-align:center;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;">
+          <div style="font-size:20px;margin-bottom:4px;">👤</div><div style="font-size:12px;color:rgba(255,255,255,0.7);">Who was involved</div>
+        </div>
+        <div style="flex:1;min-width:120px;text-align:center;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;">
+          <div style="font-size:20px;margin-bottom:4px;">📌</div><div style="font-size:12px;color:rgba(255,255,255,0.7);">What happened</div>
+        </div>
+        <div style="flex:1;min-width:120px;text-align:center;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;">
+          <div style="font-size:20px;margin-bottom:4px;">🗓️</div><div style="font-size:12px;color:rgba(255,255,255,0.7);">When it occurred</div>
+        </div>
+        <div style="flex:1;min-width:120px;text-align:center;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;">
+          <div style="font-size:20px;margin-bottom:4px;">📍</div><div style="font-size:12px;color:rgba(255,255,255,0.7);">Where it happened</div>
+        </div>
+        <div style="flex:1;min-width:120px;text-align:center;padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;">
+          <div style="font-size:20px;margin-bottom:4px;">📎</div><div style="font-size:12px;color:rgba(255,255,255,0.7);">Any evidence</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 18 — CULTURE OF TRANSPARENCY
+════════════════════════════════════════════════ -->
+<div class="slide bg-green">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">18</div>
+      <div class="slide-icon">🌱</div>
+      <div>
+        <div class="slide-title">Culture of <span>Transparency</span></div>
+        <div class="slide-subtitle">Building a speak-up culture across Nigerian cricket</div>
+      </div>
+    </div>
+    <div class="two-col" style="margin-bottom:20px;">
+      <div>
+        <div class="card accent-green" style="margin-bottom:16px;">
+          <div style="font-size:32px;margin-bottom:8px;">🗣️</div>
+          <div class="card-title">Speak Up — Safe Reporting</div>
+          <div class="card-body">Every NCF stakeholder has both the <em>right</em> and the <em>responsibility</em> to speak up when they witness misconduct. A culture of silence enables wrongdoing to persist and ultimately harms the sport we are all here to develop.</div>
+        </div>
+        <div class="card accent-gold">
+          <div class="card-title">🏛️ The Board's Role in Culture</div>
+          <ul class="checklist" style="margin-top:10px;">
+            <li>Model ethical behaviour at every board meeting</li>
+            <li>Publicly champion the speak-up culture</li>
+            <li>Visibly support those who raise concerns</li>
+            <li>Zero tolerance for retaliation — enforced at top level</li>
+            <li>Annual communication to all stakeholders on ethics</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:16px;padding:24px;text-align:center;background:rgba(0,135,81,0.12);border-color:rgba(0,183,104,0.3);">
+          <div style="font-size:48px;margin-bottom:12px;">🌱→🌳</div>
+          <div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:8px;">From Fear to Trust</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.7;">The journey from a culture of silence to a culture of integrity requires consistent leadership, visible accountability, and genuine protection for those who speak up. It starts with the Board.</div>
+        </div>
+        <div class="card-grid card-grid-2" style="gap:12px;">
+          <div class="card" style="padding:16px;text-align:center;">
+            <div style="font-size:28px;">👁️</div>
+            <div style="font-size:12px;font-weight:700;color:var(--gold);margin-top:6px;">Transparency</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);margin-top:4px;">Publish anonymised outcomes annually</div>
+          </div>
+          <div class="card" style="padding:16px;text-align:center;">
+            <div style="font-size:28px;">🤝</div>
+            <div style="font-size:12px;font-weight:700;color:var(--gold);margin-top:6px;">Trust</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);margin-top:4px;">Protect every reporter unconditionally</div>
+          </div>
+          <div class="card" style="padding:16px;text-align:center;">
+            <div style="font-size:28px;">🎓</div>
+            <div style="font-size:12px;font-weight:700;color:var(--gold);margin-top:6px;">Education</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);margin-top:4px;">Annual mandatory training for all</div>
+          </div>
+          <div class="card" style="padding:16px;text-align:center;">
+            <div style="font-size:28px;">📣</div>
+            <div style="font-size:12px;font-weight:700;color:var(--gold);margin-top:6px;">Communication</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);margin-top:4px;">Regular updates via newsletters &amp; website</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 19 — 90-DAY ROADMAP
+════════════════════════════════════════════════ -->
+<div class="slide bg-dark">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num">19</div>
+      <div class="slide-icon">🗺️</div>
+      <div>
+        <div class="slide-title">90-Day <span>Compliance Roadmap</span></div>
+        <div class="slide-subtitle">Structured implementation plan for the NCF Compliance Framework</div>
+      </div>
+    </div>
+    <div class="roadmap-row" style="margin-bottom:20px;">
+      <div class="roadmap-phase phase-1">
+        <div class="phase-label">Days 1–30</div>
+        <div class="phase-title">📐 Foundation</div>
+        <ul class="checklist">
+          <li>Board approves Compliance &amp; Ethics Policy suite</li>
+          <li>Compliance Officer formally appointed</li>
+          <li>Whistleblowing portal &amp; hotline launched</li>
+          <li>All board members complete induction training</li>
+          <li>Conflict of interest register established</li>
+          <li>Communication plan distributed to all stakeholders</li>
+        </ul>
+      </div>
+      <div class="roadmap-phase phase-2">
+        <div class="phase-label">Days 31–60</div>
+        <div class="phase-title">🚀 Rollout</div>
+        <ul class="checklist">
+          <li>Compliance training workshops for all staff</li>
+          <li>Player anti-corruption briefings completed</li>
+          <li>Anti-doping education sessions delivered</li>
+          <li>Match integrity protocols embedded in event management</li>
+          <li>First compliance self-assessment submitted</li>
+          <li>Risk register drafted and reviewed by Board</li>
+        </ul>
+      </div>
+      <div class="roadmap-phase phase-3">
+        <div class="phase-label">Days 61–90</div>
+        <div class="phase-title">📊 Embed &amp; Review</div>
+        <ul class="checklist">
+          <li>First compliance monitoring report to Board</li>
+          <li>ICC membership criteria self-assessment completed</li>
+          <li>Audit of whistleblowing system effectiveness</li>
+          <li>Board ethics pledge signed and published</li>
+          <li>Annual compliance calendar set for next 12 months</li>
+          <li>External stakeholder communication on NCF commitment</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card accent-gold">
+      <div class="card-title">📅 Annual Reporting Model</div>
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:140px;text-align:center;padding:12px;background:rgba(255,215,0,0.07);border-radius:8px;">
+          <div style="font-size:20px;">Q1</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">Compliance audit · CoI register review</div>
+        </div>
+        <div style="flex:1;min-width:140px;text-align:center;padding:12px;background:rgba(255,215,0,0.07);border-radius:8px;">
+          <div style="font-size:20px;">Q2</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">Training refresh · Financial controls review</div>
+        </div>
+        <div style="flex:1;min-width:140px;text-align:center;padding:12px;background:rgba(255,215,0,0.07);border-radius:8px;">
+          <div style="font-size:20px;">Q3</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">Mid-year board compliance review · Risk update</div>
+        </div>
+        <div style="flex:1;min-width:140px;text-align:center;padding:12px;background:rgba(255,215,0,0.07);border-radius:8px;">
+          <div style="font-size:20px;">Q4</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">Annual report · ICC submission · Policy updates</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NCF Compliance &amp; Ethics Training</span><span>🏏 Nigeria Cricket Federation</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SLIDE 20 — CONCLUSION & ETHICS PLEDGE
+════════════════════════════════════════════════ -->
+<div class="slide hero-bg">
+  <div class="slide-inner">
+    <div class="slide-header">
+      <div class="slide-num" style="background:var(--gold);color:#000;">20</div>
+      <div class="slide-icon">✨</div>
+      <div>
+        <div class="slide-title">Conclusion &amp; <span>Leadership Pledge</span></div>
+        <div class="slide-subtitle">Key takeaways and board commitment to ethical governance</div>
+      </div>
+    </div>
+    <div class="card-grid card-grid-3" style="margin-bottom:22px;">
+      <div class="card accent-green">
+        <div class="card-icon">🎯</div>
+        <div class="card-title">Key Takeaway 1</div>
+        <div class="card-body">Compliance is not a box-ticking exercise — it is a living culture that requires daily commitment from every board member, executive and stakeholder.</div>
+      </div>
+      <div class="card accent-gold">
+        <div class="card-icon">🌍</div>
+        <div class="card-title">Key Takeaway 2</div>
+        <div class="card-body">The case studies show that governance failures — whether match-fixing, conflict of interest or government interference — can set cricket in a country back by years or decades.</div>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-icon">📣</div>
+        <div class="card-title">Key Takeaway 3</div>
+        <div class="card-body">Speaking up is a duty, not an option. Every NCF stakeholder who witnesses misconduct and stays silent shares responsibility for the harm that follows.</div>
+      </div>
+    </div>
+    <div class="pledge-box">
+      <div class="pledge-title">🏏 NCF Board Ethics Pledge</div>
+      <div class="pledge-text">
+        "We, the Board and Senior Management of the Nigeria Cricket Federation, commit to upholding the highest standards of integrity, transparency, and accountability in all our decisions and conduct. We pledge to champion a culture where ethical behaviour is celebrated, concerns are heard, and no one faces retaliation for speaking the truth. We will lead by example — because the future of Nigerian cricket depends on it."
+      </div>
+      <div class="pledge-sig" style="margin-top:32px;">
+        <div class="sig-line">Board Chairperson<br>________________________</div>
+        <div class="sig-line">CEO / President<br>________________________</div>
+        <div class="sig-line">Compliance Chair<br>________________________</div>
+        <div class="sig-line">Date<br>________________________</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:20px;font-size:13px;color:rgba(255,255,255,0.4);">
+      Contact: compliance@ncf.ng &nbsp;|&nbsp; +234 700 NCF COMPL &nbsp;|&nbsp; Nigeria Cricket Federation &nbsp;|&nbsp; Confidential — For Board Use Only
+    </div>
+  </div>
+</div>
+
+</div><!-- end slide-container -->
+
+<!-- ═══════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════════ -->
+<div class="nav-bar">
+  <button id="prev-btn" onclick="changeSlide(-1)" disabled>← Previous</button>
+  <span id="slide-counter">Slide 1 of 20</span>
+  <button id="next-btn" onclick="changeSlide(1)">Next →</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  function changeSlide(dir) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(total - 1, current + dir));
+    slides[current].classList.add('active');
+    slides[current].scrollTop = 0;
+    updateNav();
+  }
+
+  function updateNav() {
+    document.getElementById('prev-btn').disabled = current === 0;
+    document.getElementById('next-btn').disabled = current === total - 1;
+    document.getElementById('slide-counter').textContent = `Slide ${current + 1} of ${total}`;
+    const pct = ((current + 1) / total * 100).toFixed(1);
+    document.getElementById('progress').style.width = pct + '%';
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+  });
+
+  updateNav();
+</script>
+</body>
+</html>
